@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script defer src="./js/materialize.min.js"></script>
+    <script type="module" defer src="./js/script.js"></script>
+    <link rel="shortcut icon" href="./images/icon.png" type="image/png">
+    <title>Text Summarization</title>
+</head>
+
+<body>
+
+    <header>
+        <nav class="green lighten-1">
+
+            <div class="nav-wrapper">
+
+                <a href="/" class="brand-logo right">
+                    <i class="material-icons left" style="font-size: larger;">assignment</i>
+                    <span class="hide-on-med-and-down">Automatic Text Summarization</span>
+                </a>
+
+                <a data-target="mobile-demo" class="sidenav-trigger" style="cursor: pointer;">
+                    <i class="material-icons" style="font-size: xx-large;">menu</i>
+                </a>
+
+                <ul class="left hide-on-med-and-down">
+
+                    <li id="document-link">
+                        <a style="font-size: large;">
+                            <i class="material-icons left">insert_drive_file</i>Document
+                        </a>
+                    </li>
+
+                    <li id="article-link"><a style="font-size: large;"><i
+                                class="material-icons left">format_color_text</i>Article
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <div style="background-color: #66bb6a;">
+                <center>
+                    <div style="font-size: x-large; padding-top: 10%; color: white;">
+                        <span>Automatic</span><br>
+                        <span>Text</span><br>
+                        <span>Summarization</span>
+                    </div>
+                </center>
+
+                <div class="divider" style="margin-top: 10%;"></div>
+            </div>
+
+            <li id="document-link" style="margin-top: 15%;"><a class="green-text text-lighten-1"><i
+                        class="material-icons left green-text text-lighten-1">insert_drive_file</i>Document
+                </a></li>
+            <li id="article-link"><a class="green-text text-lighten-1" +><i
+                        class="material-icons left green-text text-lighten-1">format_color_text</i>Article
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <div id="main-content">
+            <br>
+            <div class="row">
+                <div class="col l4 m6 s12 offset-l2 animate__animated animate__zoomIn">
+                    <img src="./images/image-1.png" width="300" height="250">
+                    <h4 class="container blue-grey-text">Quickly Summarize
+                        Documents</h4> <br>
+                    <div class="progress container">
+                        <div class="determinate green lighten-1" style="width: 100%"></div>
+                    </div> <br>
+                    <div class="container blue-grey-text text-lighten-2 flow-text">
+                        Upload a document to quickly summarize the content of the file either by selecting the file or
+                        drag and drop the file. PDF, DOC
+                        DOCX, TXT.
+                    </div>
+                </div>
+                <div class="col l4 m6 s12 _offset-l1 animate__animated animate__zoomIn">
+                    <img src="./images/image-2.png" width="300" height="250">
+                    <h4 class="container blue-grey-text">Summarize Online Articles</h4> <br>
+                    <div class="progress container">
+                        <div class="determinate green lighten-1" style="width: 100%"></div>
+                    </div> <br>
+                    <div class="container blue-grey-text text-lighten-2 flow-text">
+                        Get the summary of any online article using the URL, Simply copy and paste the URL of an article
+                        to generate the summary.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <br><br>
+        <div class="container">
+            <hr />
+            <p class="grey-text text-lighten-1">Copyright &copy; <span></span> Abdul Moiz - Automatic Text
+                Summarizer
+                Application</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
