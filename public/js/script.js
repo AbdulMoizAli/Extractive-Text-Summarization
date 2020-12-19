@@ -224,7 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addSampleLink() {
         const input = document.querySelector('input');
-
-        input.addEventListener('focusin', () => input.setAttribute('placeholder', 'https://medium.com/linuxforeveryone/the-real-reason-linux-users-love-the-command-line-e8043f583028'));
+        input.focus();
     }
 });
