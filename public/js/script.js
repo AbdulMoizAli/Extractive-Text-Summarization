@@ -225,6 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function addSampleLink() {
         const input = document.querySelector('input');
 
-        input.addEventListener('focusin', () => input.setAttribute('placeholder', 'https://www.reuters.com/article/us-tesla-musk-sec/teslas-musk-mocks-sec-as-judge-demands-they-justify-fraud-settlement-idUSKCN1ME2CC'));
+        input.addEventListener('focusin', () => input.setAttribute('placeholder', 'https://medium.com/linuxforeveryone/the-real-reason-linux-users-love-the-command-line-e8043f583028'));
     }
 });
