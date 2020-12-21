@@ -18,10 +18,9 @@ export const articlePageLayout = /* html */ `
         </div>
     </div>
     <div class="row container">
-        <center><span class="document-error"></span></center>
-        <span id="loader"></span>
         <button class="blue-grey lighten-2 waves-effect waves-light btn right" type="submit"><i
                 class="material-icons right">send</i>SUMMARIZE</button>
+        <center><span id="loader"></span></center>
     </div>
 </form>
 <div id="article-output"></div>

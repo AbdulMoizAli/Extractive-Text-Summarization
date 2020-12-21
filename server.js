@@ -25,7 +25,7 @@ app.post('/document', extractText, (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            message: 'something went wrong !'
+            message: 'Something went wrong'
         });
     }
 });
@@ -39,7 +39,7 @@ app.post('/article', extractArticle, (req, res) => {
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({
-            message: 'something went wrong !'
+            message: 'Something went wrong'
         });
     }
 });
@@ -54,7 +54,7 @@ app.post('/text', (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            message: 'something went wrong !'
+            message: 'Something went wrong'
         });
     }
 });
@@ -62,7 +62,7 @@ app.post('/text', (req, res) => {
 async function extractText(req, res, next) {
     if (!req.files)
         return res.status(400).json({
-            message: 'please select a document to summarize !'
+            message: 'Please select a document to summarize'
         });
 
     const document = req.files.document;
@@ -86,11 +86,11 @@ async function extractText(req, res, next) {
             res.locals.text = data.value;
         } else
             return res.status(400).json({
-                message: 'incorrect document type, PDF, DOC, DOCX and TXT document types are supported !'
+                message: 'Incorrect document type, only PDF, DOC, DOCX and TXT document types are supported'
             });
     } catch (error) {
         return res.status(500).json({
-            message: 'something went wrong !'
+            message: 'Something went wrong'
         });
     }
 
@@ -117,7 +117,7 @@ async function extractArticle(req, res, next) {
         next();
     } catch (error) {
         res.status(500).json({
-            message: 'something went wrong !'
+            message: 'Something went wrong'
         });
     }
 }
@@ -127,4 +127,4 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server Listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server Listening on Port ${PORT}`));

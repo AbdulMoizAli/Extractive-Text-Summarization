@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector('li a').addEventListener('click', (e) => e.preventDefault());
     document.querySelector('footer span').textContent = new Date().getFullYear();
+
     const sideNav = M.Sidenav.init(document.querySelector('.sidenav'), {
 
         onOpenStart: () => {
@@ -37,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const errorModal = M.Modal.init(document.querySelector('.modal'));
+
     const documentLinks = document.querySelectorAll('#document-link');
     const articleLinks = document.querySelectorAll('#article-link');
     const pageTitle = document.querySelector('title');
@@ -48,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             pageTitle.textContent = 'Text Summarization | Document Summarization';
             mainContent.innerHTML = docPageLayout;
             dropzoneInit();
-            validateDocumentType();
             summarizeDocument();
         });
         articleLinks[i].addEventListener('click', () => {
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.innerHTML = articlePageLayout;
             M.Tooltip.init(document.querySelectorAll('.tooltipped'));
             summarizeArticle();
-            addSampleLink();
+            focusURLInput();
         });
     }
 
@@ -67,41 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sideNav.close();
     }
 
-    function validateDocumentType() {
-        const inputDocument = document.querySelector('input[type=file]');
-        inputDocument.addEventListener('input', () => {
-            const index = inputDocument.value.lastIndexOf('.');
-            const length = inputDocument.value.length;
-            const documentType = inputDocument.value.substring(index, length);
-
-            const documentError = document.querySelector('.document-error');
-
-            if (['.pdf', '.doc', '.docx', '.txt'].includes(documentType)) {
-                documentError.textContent = '';
-                documentError.style.display = 'none';
-            } else {
-                documentError.textContent = 'incorrect document type, PDF, DOC, DOCX and TXT document types are supported !';
-                documentError.style.display = 'block';
-            }
-        });
-    }
-
     function summarizeDocument() {
         const form = document.querySelector('form');
-        const documentError = document.querySelector('.document-error');
-        const inputDocument = document.querySelector('input[type=file]');
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
-
-            if (getComputedStyle(documentError).display !== 'none')
-                return;
-
-            if (inputDocument.files.length === 0) {
-                documentError.textContent = 'please select a document to summarize !';
-                documentError.style.display = 'block';
-                return;
-            }
 
             const response = await fetch('/document', {
                 method: 'POST',
@@ -118,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
             } else {
-                documentError.textContent = data.message;
-                documentError.style.display = 'block';
+                document.querySelector('#error-message').textContent = data.message;
+                errorModal.open();
             }
         });
     }
@@ -128,22 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const form = document.querySelector('form');
         const url = document.querySelector('input');
         const text = document.querySelector('textarea');
-        const documentError = document.querySelector('.document-error');
         const articleOutput = document.querySelector('#article-output');
-
-        const clearError = () => {
-            documentError.textContent = '';
-            documentError.style.display = 'none';
-        }
-
-        url.addEventListener('input', clearError);
-        text.addEventListener('input', clearError);
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            if (!url.value && !text.value && !url.getAttribute('placeholder'))
-            return;
 
             const loader = document.querySelector('#loader');
 
@@ -216,13 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('.article-data').style.display = 'block';
                 }
             } else {
-                documentError.textContent = data.message;
-                documentError.style.display = 'block';
+                document.querySelector('#error-message').textContent = data.message;
+                errorModal.open();
             }
         });
     }
 
-    function addSampleLink() {
+    function focusURLInput() {
         const input = document.querySelector('input');
         input.focus();
     }

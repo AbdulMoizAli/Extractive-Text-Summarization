@@ -12,7 +12,6 @@ export const docPageLayout = /* html */ `
     <br>
     <div class="row container">
         <div class="col l6 m6 s12 offset-l3">
-            <span class="document-error"></span>
             <button class="blue-grey lighten-2 waves-effect waves-light btn right" type="submit"><i
                     class="material-icons right">send</i>SUMMARIZE</button>
         </div>
