@@ -17,7 +17,6 @@
   "license": "MIT",
   "dependencies": {
     "article-parser": "^4.2.5",
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "mammoth": "^1.4.14",
