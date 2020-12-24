@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const fileUpload = require("express-fileupload");
 const pdf = require("pdf-parse");
@@ -16,7 +17,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 app.use(express.json());
 
-app.post("/document", extractText, (req, res) => {
+const corsOptions = {
+  origin: "https://createsummary.herokuapp.com/",
+  optionsSuccessStatus: 200,
+};
+
+app.post("/document", cors(corsOptions), extractText, (req, res) => {
   const text = res.locals.text;
   try {
     const summary = summarizeText(text);
@@ -30,7 +36,7 @@ app.post("/document", extractText, (req, res) => {
   }
 });
 
-app.post("/article", extractArticle, (req, res) => {
+app.post("/article", cors(corsOptions), extractArticle, (req, res) => {
   const data = res.locals.data;
   try {
     const summary = summarizeText(data.text);
@@ -44,7 +50,7 @@ app.post("/article", extractArticle, (req, res) => {
   }
 });
 
-app.post("/text", (req, res) => {
+app.post("/text", cors(corsOptions), (req, res) => {
   try {
     const text = req.body.payload;
     const summary = summarizeText(text);
