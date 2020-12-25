@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 app.use(express.json());
 
-app.post("/document" extractText, (req, res) => {
+app.post("/document", extractText, (req, res) => {
   const text = res.locals.text;
   try {
     const summary = summarizeText(text);
