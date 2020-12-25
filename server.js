@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 app.use(express.json());
 
-app.post("/document", checkForCsrf, extractText, (req, res) => {
+app.post("/document" extractText, (req, res) => {
   const text = res.locals.text;
   try {
     const summary = summarizeText(text);
@@ -30,7 +30,7 @@ app.post("/document", checkForCsrf, extractText, (req, res) => {
   }
 });
 
-app.post("/article", checkForCsrf, extractArticle, (req, res) => {
+app.post("/article", extractArticle, (req, res) => {
   const data = res.locals.data;
   try {
     const summary = summarizeText(data.text);
@@ -44,7 +44,7 @@ app.post("/article", checkForCsrf, extractArticle, (req, res) => {
   }
 });
 
-app.post("/text", checkForCsrf, (req, res) => {
+app.post("/text", (req, res) => {
   try {
     const text = req.body.payload;
     const summary = summarizeText(text);
@@ -121,18 +121,6 @@ async function extractArticle(req, res, next) {
       message: "Something went wrong",
     });
   }
-}
-
-function checkForCsrf(req, res, next) {
-  const host = `${req.protocol}://${req.headers.host}`;
-  const origin = req.headers.origin;
-
-  if (host !== origin)
-    return res.status(500).json({
-      message: "Something went wrong",
-    });
-
-  next();
 }
 
 app.use((req, res) => {
