@@ -6,13 +6,12 @@ const {
     TfIdf,
     Lexicon,
     RuleSet,
-    BrillPOSTagger
+    BrillPOSTagger,
 } = require('natural');
 
 const stopword = require('stopword');
 
 function summarizeText(text) {
-
     text = text.trim();
     text = text.replace(/\s/g, ' ');
 
@@ -32,11 +31,9 @@ function summarizeText(text) {
     summary = summary.trim();
 
     return summary;
-
 }
 
 function calculateTFIDFScore(sentences) {
-
     const tfidf = new TfIdf();
     const tfidfScores = new Object();
 
@@ -45,7 +42,7 @@ function calculateTFIDFScore(sentences) {
     sentences.forEach((sentence, i) => {
         const words = wordPreprocessing(sentence);
         const wordsScore = new Object();
-        words.forEach(word => wordsScore[word] = tfidf.tfidf(word, i));
+        words.forEach(word => (wordsScore[word] = tfidf.tfidf(word, i)));
         tfidfScores[i] = wordsScore;
     });
 
@@ -53,9 +50,11 @@ function calculateTFIDFScore(sentences) {
 }
 
 function wordPreprocessing(sentence) {
-
     const wordTokenizer = new WordTokenizer();
-    const tagger = new BrillPOSTagger(new Lexicon('EN', 'N', 'NNP'), new RuleSet('EN'));
+    const tagger = new BrillPOSTagger(
+        new Lexicon('EN', 'N', 'NNP'),
+        new RuleSet('EN')
+    );
 
     let words = wordTokenizer.tokenize(sentence);
 
@@ -66,9 +65,20 @@ function wordPreprocessing(sentence) {
 
     const posTaggedWords = tagger.tag(words).taggedWords;
     words = posTaggedWords.map(word => {
-
-        if (['NN', 'NNP', 'NNS', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'].includes(word.tag)) {
-            return word.token
+        if (
+            [
+                'NN',
+                'NNP',
+                'NNS',
+                'VB',
+                'VBD',
+                'VBG',
+                'VBN',
+                'VBP',
+                'VBZ',
+            ].includes(word.tag)
+        ) {
+            return word.token;
         } else {
             return '';
         }
@@ -81,7 +91,6 @@ function wordPreprocessing(sentence) {
 }
 
 function calculateSentencesScore(tfidfScores) {
-
     const sentencesScore = new Object();
 
     for (const i in tfidfScores) {
@@ -89,26 +98,21 @@ function calculateSentencesScore(tfidfScores) {
         const sentence = tfidfScores[i];
         const wordCount = Object.keys(sentence).length;
 
-        for (const word in sentence)
-            score += sentence[word];
+        for (const word in sentence) score += sentence[word];
 
         const totalScore = score / wordCount;
-        if (totalScore)
-            sentencesScore[i] = score / wordCount;
-        else
-            sentencesScore[i] = 0;
+        if (totalScore) sentencesScore[i] = score / wordCount;
+        else sentencesScore[i] = 0;
     }
 
     return sentencesScore;
 }
 
 function calculateAverageSentenceScore(sentencesScore) {
-
     let score = 0;
     const count = Object.keys(sentencesScore).length;
 
-    for (const sentence in sentencesScore)
-        score += sentencesScore[sentence];
+    for (const sentence in sentencesScore) score += sentencesScore[sentence];
 
     return score / count;
 }
