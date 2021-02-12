@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: "Quicksand", sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     font-size: 20px;
     cursor: pointer;
@@ -50,11 +50,11 @@
     color: #90a4ae !important;
 }
 
-.input-field input[type=text]:focus+label {
+.input-field input[type='text']:focus + label {
     color: #66bb6a !important;
 }
 
-.input-field textarea:focus+label {
+.input-field textarea:focus + label {
     color: #66bb6a !important;
 }
 
@@ -66,7 +66,7 @@
     color: #90a4ae;
 }
 
-.input-field input[type=text]:focus {
+.input-field input[type='text']:focus {
     border-bottom: 1px solid #66bb6a !important;
     box-shadow: 0 1px 0 0 #66bb6a !important;
 }
