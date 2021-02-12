@@ -8,7 +8,7 @@ Automatic Extractive Text Summarization using TF-IDF Frequency Analysis.
 
 ## Usage ⚙
 
-### Installation
+### Installation ⬇
 
 Install the dependencies
 
@@ -16,7 +16,8 @@ Install the dependencies
 $ npm install
 ```
 
-### Serve
+### Serve 🖥
+
 Start the server
 
 ```sh
